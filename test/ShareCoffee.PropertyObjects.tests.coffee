@@ -9,7 +9,10 @@ describe 'ShareCoffee.SuggestProperties', ->
 
   before () ->
     #Fake that ShareCoffee has been loaded
-    root.ShareCoffee = {}
+    root.ShareCoffee =
+      REST:
+        RequestProperties: ()->
+
     require '../src/ShareCoffee.PropertyObjects'
 
   it 'should create a constructor function for PropertyObjects in ShareCoffee', ->
@@ -130,4 +133,37 @@ describe 'ShareCoffee.SuggestProperties', ->
     actual = new ShareCoffee.SuggestProperties()
     actual.should.have.property 'culture'
     chai.assert.isNull actual.culture
+
+  it 'should expose an hostWebUrl property', ->
+    actual = new ShareCoffee.SuggestProperties()
+    actual.should.have.property 'hostWebUrl'
+    chai.assert.isNull actual.hostWebUrl
+    actual.hostWebUrl = "foo"
+    actual.hostWebUrl.should.equal "foo"
+
+  it 'should expose an onSuccess property', ->
+    actual = new ShareCoffee.SuggestProperties()
+    actual.should.have.property 'onSuccess'
+    chai.assert.isNull actual.onSuccess
+    actual.onSuccess = () ->
+    actual.onSuccess.should.be.an 'function'
+
+  it 'should expose an onError property', ->
+    actual = new ShareCoffee.SuggestProperties()
+    actual.should.have.property 'onError'
+    chai.assert.isNull actual.onError
+    actual.onError = () ->
+    actual.onError.should.be.an 'function'
+
+  it 'should expose a getRequestProperties method', ->
+    sut = new ShareCoffee.SuggestProperties()
+    sut.should.have.property 'getRequestProperties'
+    sut.getRequestProperties.should.be.an 'function'
+
+  it 'should return an instance of ShareCoffee.REST.RequestProperties', ->
+    spy = sinon.spy ShareCoffee.REST, 'RequestProperties'
+    sut = new ShareCoffee.SuggestProperties()
+    actual = sut.getRequestProperties()
+    spy.calledOnce.should.be.true
+    spy.calledWithExactly('Search/suggest', null, null, null, null, null).should.be.true
 

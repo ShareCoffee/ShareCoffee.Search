@@ -13,4 +13,13 @@ root.ShareCoffee.SuggestProperties = class
     @fcapitalizefirstletters = null unless @fcapitalizefirstletters?
     @showpeoplenamesuggestions = null unless @showpeoplenamesuggestions?
     @culture = null unless @culture?
+    @hostWebUrl = null
+    @onSuccess = null
+    @onError = null
+
+  getRequestProperties: () =>
+    new ShareCoffee.REST.RequestProperties @getUrl(), @hostWebUrl, null, null, @onSuccess, @onError
+
+  getUrl: () =>
+    "Search/suggest"
 
