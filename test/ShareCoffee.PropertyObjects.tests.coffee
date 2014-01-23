@@ -167,3 +167,46 @@ describe 'ShareCoffee.SuggestProperties', ->
     spy.calledOnce.should.be.true
     spy.calledWithExactly('Search/suggest', null, null, null, null, null).should.be.true
 
+  it 'should expose a getUrl function', ->
+    sut = new ShareCoffee.SuggestProperties()
+    sut.should.have.property 'getUrl'
+    sut.getUrl.should.be.an 'function'
+
+  it 'should return plain suggest url when no property is set', ->
+    sut = new ShareCoffee.SuggestProperties()
+    actual = sut.getUrl()
+    actual.should.be.an 'string'
+    actual.should.equal 'Search/suggest'
+
+  it 'should escape strings in the url as required for REST', ->
+    sut = new ShareCoffee.SuggestProperties()
+    sut.querytext = "SharePoint"
+    actual = sut.getUrl()
+    actual.should.be.an 'string'
+    console.dir actual
+    actual.should.equal "Search/suggest?querytext='SharePoint'"
+
+  it 'should escape numbers in the url as required for REST', ->
+    sut = new ShareCoffee.SuggestProperties()
+    sut.culture = 1031
+    actual = sut.getUrl()
+    actual.should.be.an 'string'
+    console.dir actual
+    actual.should.equal "Search/suggest?culture=1031"
+
+  it 'should escape booleans in the url as required for REST', ->
+    sut = new ShareCoffee.SuggestProperties()
+    sut.showpeoplenamesuggestions = false
+    actual = sut.getUrl()
+    actual.should.be.an 'string'
+    console.dir actual
+    actual.should.equal "Search/suggest?showpeoplenamesuggestions=false"
+
+  it 'should provide & as parameter delimiter for the url', ->
+    sut = new ShareCoffee.SuggestProperties()
+    sut.showpeoplenamesuggestions = false
+    sut.culture = 1031
+    actual = sut.getUrl()
+    actual.should.be.an 'string'
+    console.dir actual
+    actual.should.equal "Search/suggest?showpeoplenamesuggestions=false&culture=1031"
