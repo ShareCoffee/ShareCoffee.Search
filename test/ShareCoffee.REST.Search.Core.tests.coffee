@@ -26,6 +26,10 @@ describe 'ShareCoffee.REST.Search.Core', ->
     root.ShareCoffee.REST.should.have.property 'Search'
     root.ShareCoffee.REST.Search.should.be.an 'object'
 
+  it 'should expose MaxUrlLength on ShareCoffee', ->
+      ShareCoffee.should.have.property 'MaxUrlLength'
+      ShareCoffee.MaxUrlLength.should.be.an 'number'
+
   it 'should expose an build property on Search', ->
     root.ShareCoffee.REST.Search.should.have.property 'build'
     root.ShareCoffee.REST.Search.build.should.be.an 'object'

@@ -8,6 +8,9 @@ describe 'ShareCoffee.Properties', ->
 
   before () ->
     root.ShareCoffee =
+      MaxUrlLength: 100
+      Commons:
+        getApiRootUrl: () -> "http://foobar.sharepoint.com/sites/developer/_api/"
       REST:
         RequestProperties: () ->
 
@@ -28,6 +31,30 @@ describe 'ShareCoffee.Properties', ->
       actual = new ShareCoffee.QueryProperties()
       actual.querytext = 'SharePoint'
       actual.querytext.should.equal 'SharePoint'
+
+    it 'should expose an validateUrl method on QueryProperties', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.should.have.property 'validateUrl'
+      actual.validateUrl.should.be.an 'function'
+
+    it 'should not throw an error if url is short enough', ->
+      actual = new ShareCoffee.QueryProperties()
+      ( -> actual.validateUrl()).should.not.throw ''
+
+    it 'should throw an error if url is to long', ->
+      actual = new ShareCoffee.QueryProperties("Microsoft SharePoint Server 2013","ProductVersion,ProductName", "Thorstens Template")
+      actual.startrow = 10
+      actual.rowsperpage = 40
+      actual.timeout = 10000
+      (-> actual.validateUrl()).should.throw 'URL is to long, please use a PostQuery instead of a regular GET Query'
+
+    it 'should throw an error if url is to long (HostWebAccess)', ->
+      actual = new ShareCoffee.QueryProperties("Microsoft SharePoint Server 2013","ProductVersion,ProductName", "Thorstens Template")
+      actual.startrow = 10
+      actual.rowsperpage = 40
+      actual.timeout = 10000
+      actual.hostWebUrl = "http://foobar.sharepoint.com/sites/developer"
+      (-> actual.validateUrl()).should.throw 'URL is to long, please use a PostQuery instead of a regular GET Query'
 
     it 'should set isPostQuery (property) to false', ->
       actual = new ShareCoffee.QueryProperties()
@@ -192,6 +219,13 @@ describe 'ShareCoffee.Properties', ->
       sut = new ShareCoffee.QueryProperties()
       sut.should.have.property 'getRequestProperties'
       sut.getRequestProperties.should.be.an 'function'
+
+    it 'should call validateUrl inside of getRequestProperties', ->
+      sut = new ShareCoffee.QueryProperties()
+      spy = sinon.spy sut, 'validateUrl'
+      sut.getRequestProperties()
+      spy.calledOnce.should.be.true
+      sut.validateUrl.restore()
 
      it 'should return an instance of ShareCoffee.REST.RequestProperties when getRequestProperties is called', ->
       spy = sinon.spy ShareCoffee.REST, 'RequestProperties'

@@ -3,6 +3,7 @@ root = global ? window
 if not root.ShareCoffee?
   throw new Error("LoadError")
 
+
 root.ShareCoffee.QueryProperties = class
 
   constructor: (@querytext, @selectproperties, @querytemplate) ->
@@ -57,7 +58,18 @@ root.ShareCoffee.QueryProperties = class
     url.substr 0, url.length-1
 
   getRequestProperties: () =>
+    @validateUrl()
     new ShareCoffee.REST.RequestProperties @getUrl(), @hostWebUrl, null, null, @onSuccess, @onError
+
+  validateUrl: () =>
+    url = ""
+    if @hostWebUrl?
+      url = "#{ShareCoffee.Commons.getApiRootUrl()}SP.AppContextSite(@target)/#{@getUrl()}?@target='#{@hostWebUrl}'"
+    else
+      url = "#{ShareCoffee.Commons.getApiRootUrl()}#{@getUrl()}"
+
+    if url.length > ShareCoffee.MaxUrlLength
+      throw new Error 'URL is to long, please use a PostQuery instead of a regular GET Query'
 
 root.ShareCoffee.SuggestProperties = class
 
