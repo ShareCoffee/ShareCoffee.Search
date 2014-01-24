@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>ShareCoffee.CrossDomain.Search.coffee</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="public/stylesheets/normalize.css" />
+  <link rel="stylesheet" media="all" href="sharecoffee.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="page">
+
+      <div class="header">
+        
+          <h1>ShareCoffee.CrossDomain.Search.coffee</h1>
+        
+
+        
+          <div class="toc">
+            <h3>Table of Contents</h3>
+            <ol>
+              
+                
+                <li>
+                  <a class="source" href="ShareCoffee.CrossDomain.Search.html">
+                    ShareCoffee.CrossDomain.Search.coffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="ShareCoffee.PropertyObjects.html">
+                    ShareCoffee.PropertyObjects.coffee
+                  </a>
+                </li>
+              
+                
+                <li>
+                  <a class="source" href="ShareCoffee.REST.Search.html">
+                    ShareCoffee.REST.Search.coffee
+                  </a>
+                </li>
+              
+            </ol>
+          </div>
+        
+      </div>
+
+      
+        
+        
+        
+          <div class='highlight'><pre>root = <span class="hljs-built_in">global</span> ? <span class="hljs-built_in">window</span>
+
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root.ShareCoffee? <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> root.ShareCoffee.CrossDomain?
+	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">"LoadError"</span>)
+
+root.ShareCoffee.CrossDomain.Search =
+	<span class="hljs-attribute">build</span>:
+		<span class="hljs-attribute">query</span>:
+			<span class="hljs-attribute">for</span>: <span class="hljs-keyword">new</span> ShareCoffee.CrossDomainRESTFactory <span class="hljs-string">'GET'</span>
+		<span class="hljs-attribute">postQuery</span>:
+			<span class="hljs-attribute">for</span>: <span class="hljs-keyword">new</span> ShareCoffee.CrossDomainRESTFactory <span class="hljs-string">'POST'</span>
+		<span class="hljs-attribute">suggest</span>:
+			<span class="hljs-attribute">for</span>: <span class="hljs-keyword">new</span> ShareCoffee.CrossDomainRESTFactory <span class="hljs-string">'GET'</span></pre></div>
+        
+      
+      <div class="fleur">h</div>
+    </div>
+  </div>
+</body>
+</html>
