@@ -3,6 +3,27 @@ root = global ? window
 if not root.ShareCoffee?
   throw new Error("LoadError")
 
+root.ShareCoffee.QueryProperties = class
+
+  constructor: (@querytext, @startrow, @trimduplicates) ->
+    @startrow = null unless @startrow?
+    @trimduplicates = null unless @trimduplicates
+
+  getUrl: () =>
+    urlProperties = ['querytext', 'startrow', 'trimduplicates']
+    url = "Search/query?"
+    for p of @
+      propertyValue = @[p]
+      if urlProperties.indexOf(p) > -1 and propertyValue?
+        if typeof(propertyValue) is 'string'
+          url = "#{url}#{p}='#{propertyValue}'&"
+        else if typeof(propertyValue) is 'number' or typeof(propertyValue) is 'boolean'
+          url = "#{url}#{p}=#{propertyValue}&"
+
+    url.substr 0, url.length-1
+
+  getRequestProperties: () =>
+
 root.ShareCoffee.SuggestProperties = class
 
   constructor: (@querytext, @inumberofquerysuggestions, @inumberofresultsuggestions, @fprequerysuggestions, @fhithighlighting, @fcapitalizefirstletters, @showpeoplenamesuggestions, @culture) ->
