@@ -7,6 +7,7 @@ if not root.ShareCoffee?
 root.ShareCoffee.QueryProperties = class
 
   constructor: (@querytext, @selectproperties, @querytemplate) ->
+    @querytext = null unless @querytext?
     @isPostQuery = false
     @querytemplate = null unless @querytemplate?
     @enableinterleaving = null unless @enableinterleaving?
@@ -59,7 +60,7 @@ root.ShareCoffee.QueryProperties = class
 
   getRequestProperties: () =>
     @validateUrl()
-    new ShareCoffee.REST.RequestProperties @getUrl(), @hostWebUrl, null, null, @onSuccess, @onError
+    new ShareCoffee.REST.RequestProperties @getUrl(), null, @hostWebUrl, null, @onSuccess, @onError
 
   validateUrl: () =>
     url = ""
@@ -71,10 +72,29 @@ root.ShareCoffee.QueryProperties = class
     if url.length > ShareCoffee.MaxUrlLength
       throw new Error 'URL is to long, please use a PostQuery instead of a regular GET Query'
 
+root.ShareCoffee.PostQueryProperties = class extends root.ShareCoffee.QueryProperties
+
+  constructor: (@querytext, @selectproperties, @querytemplate) ->
+    super(@querytext, @selectproperties, @querytemplate)
+    @isPostQuery = true
+
+  getRequestProperties: () ->
+    payload = {}
+    urlProperties = ['querytext', 'querytemplate', 'enableinterleaving', 'sourceid', 'rankingmodelid', 'startrow', 'rowlimit', 'rowsperpage', 'selectproperties',
+    'culture', 'refiners', 'refinementfilters', 'hiddenconstraints', 'sortlist', 'enablestemming', 'trimduplicates', 'trimduplicatesincludeid',
+    'timeout', 'enablenicknames', 'enablephonetic', 'enablefql', 'hithighlightedproperties', 'bypassresulttypes',
+    'processbestbets', 'clienttype', 'personalizationdata', 'resultsurl', 'querytag', 'enablequeryrules', 'enablesorting']
+    for p of @
+      propertyValue = @[p]
+      if urlProperties.indexOf(p) > -1 and propertyValue?
+        payload[p] = @[p]
+
+    new ShareCoffee.REST.RequestProperties "Search/postQuery", payload, @hostWebUrl, null, @onSuccess, @onError
+
 root.ShareCoffee.SuggestProperties = class
 
   constructor: (@querytext, @inumberofquerysuggestions, @inumberofresultsuggestions, @fprequerysuggestions, @fhithighlighting, @fcapitalizefirstletters, @showpeoplenamesuggestions, @culture) ->
-
+    @querytext = null unless @querytext?
     @inumberofquerysuggestions = null unless @inumberofquerysuggestions?
     @inumberofresultsuggestions = null unless @inumberofresultsuggestions?
     @fprequerysuggestions = null unless @fprequerysuggestions?
@@ -87,7 +107,7 @@ root.ShareCoffee.SuggestProperties = class
     @onError = null
 
   getRequestProperties: () =>
-    new ShareCoffee.REST.RequestProperties @getUrl(), @hostWebUrl, null, null, @onSuccess, @onError
+    new ShareCoffee.REST.RequestProperties @getUrl(), null, @hostWebUrl, null, @onSuccess, @onError
 
   getUrl: () =>
     urlProperties = ['querytext', 'inumberofquerysuggestions', 'inumberofresultsuggestions', 'fprequerysuggestions', 'fhithighlighting', 'fcapitalizefirstletters', 'showpeoplenamesuggestions', 'culture']

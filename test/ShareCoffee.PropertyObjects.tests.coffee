@@ -275,6 +275,42 @@ describe 'ShareCoffee.Properties', ->
       actual.should.be.an 'string'
       actual.should.equal "Search/query?startrow=10&trimduplicates=false"
 
+  describe 'ShareCoffee.PostQueryProperties', ->
+
+    it 'should exists a constructor function for PostQueryProperties in ShareCoffee', ->
+      root.ShareCoffee.should.have.property 'PostQueryProperties'
+      root.ShareCoffee.PostQueryProperties.should.be.an 'function'
+
+    it 'should be inherited from QueryProerties', ->
+      sut = new ShareCoffee.PostQueryProperties()
+      sut.should.have.property 'isPostQuery'
+      sut.should.have.property 'querytext'
+      #....
+
+    it 'should set isPostQuery to true', ->
+      sut = new ShareCoffee.PostQueryProperties()
+      sut.isPostQuery.should.be.true
+
+    it 'should return all properties as payload when getRequestProperties is called', ->
+
+      spy = sinon.spy ShareCoffee.REST, "RequestProperties"
+
+      expected =
+        querytext: "SharePoint"
+        enablefql: true
+        startrow: 10
+        rowlimit: 20
+
+      sut = new ShareCoffee.PostQueryProperties()
+      sut.querytext = "SharePoint"
+      sut.enablefql = true
+      sut.startrow = 10
+      sut.rowlimit = 20
+      actual = sut.getRequestProperties()
+      spy.calledOnce.should.be.true
+      spy.calledWithExactly('Search/postQuery', expected, null, null, null, null).should.be.true
+      ShareCoffee.REST.RequestProperties.restore()
+
   describe 'ShareCoffee.SuggestProperties', ->
 
     it 'should exist a constructor function for PropertyObjects in ShareCoffee', ->
