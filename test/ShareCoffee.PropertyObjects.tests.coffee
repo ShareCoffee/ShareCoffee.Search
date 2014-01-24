@@ -28,6 +28,12 @@ describe 'ShareCoffee.Properties', ->
       actual = new ShareCoffee.QueryProperties()
       actual.querytext = 'SharePoint'
       actual.querytext.should.equal 'SharePoint'
+
+    it 'should set isPostQuery (property) to false', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.should.have.property 'isPostQuery'
+      actual.isPostQuery.should.be.false
+
     it 'should accept and store selectproperties as a ctor parameter', ->
       actual = new ShareCoffee.QueryProperties '', 'Foo'
       actual.should.have.property 'selectproperties'
@@ -186,6 +192,14 @@ describe 'ShareCoffee.Properties', ->
       sut = new ShareCoffee.QueryProperties()
       sut.should.have.property 'getRequestProperties'
       sut.getRequestProperties.should.be.an 'function'
+
+     it 'should return an instance of ShareCoffee.REST.RequestProperties when getRequestProperties is called', ->
+      spy = sinon.spy ShareCoffee.REST, 'RequestProperties'
+      sut = new ShareCoffee.QueryProperties()
+      actual = sut.getRequestProperties()
+      spy.calledOnce.should.be.true
+      spy.calledWithExactly('Search/query', null, null, null, null, null).should.be.true
+      ShareCoffee.REST.RequestProperties.restore()
 
     it 'should expose a getUrl method on an QueryProperties instance', ->
       sut = new ShareCoffee.QueryProperties()
@@ -378,8 +392,10 @@ describe 'ShareCoffee.Properties', ->
       spy = sinon.spy ShareCoffee.REST, 'RequestProperties'
       sut = new ShareCoffee.SuggestProperties()
       actual = sut.getRequestProperties()
+      console.dir actual
       spy.calledOnce.should.be.true
       spy.calledWithExactly('Search/suggest', null, null, null, null, null).should.be.true
+      ShareCoffee.REST.RequestProperties.restore()
 
     it 'should expose a getUrl function', ->
       sut = new ShareCoffee.SuggestProperties()

@@ -6,6 +6,7 @@ if not root.ShareCoffee?
 root.ShareCoffee.QueryProperties = class
 
   constructor: (@querytext, @selectproperties, @querytemplate) ->
+    @isPostQuery = false
     @querytemplate = null unless @querytemplate?
     @enableinterleaving = null unless @enableinterleaving?
     @sourceid = null unless @sourceid?
@@ -35,7 +36,9 @@ root.ShareCoffee.QueryProperties = class
     @querytag = null unless @querytag?
     @enablequeryrules = null unless @enablequeryrules?
     @enablesorting = null unless @enablesorting?
-
+    @hostWebUrl = null
+    @onSuccess = null
+    @onError = null
 
   getUrl: () =>
     urlProperties = ['querytext', 'querytemplate', 'enableinterleaving', 'sourceid', 'rankingmodelid', 'startrow', 'rowlimit', 'rowsperpage', 'selectproperties',
@@ -54,6 +57,7 @@ root.ShareCoffee.QueryProperties = class
     url.substr 0, url.length-1
 
   getRequestProperties: () =>
+    new ShareCoffee.REST.RequestProperties @getUrl(), @hostWebUrl, null, null, @onSuccess, @onError
 
 root.ShareCoffee.SuggestProperties = class
 
