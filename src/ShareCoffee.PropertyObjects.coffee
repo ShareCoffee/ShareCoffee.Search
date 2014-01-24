@@ -47,12 +47,17 @@ root.ShareCoffee.QueryProperties = class
     'culture', 'refiners', 'refinementfilters', 'hiddenconstraints', 'sortlist', 'enablestemming', 'trimduplicates', 'trimduplicatesincludeid',
     'timeout', 'enablenicknames', 'enablephonetic', 'enablefql', 'hithighlightedproperties', 'bypassresulttypes',
     'processbestbets', 'clienttype', 'personalizationdata', 'resultsurl', 'querytag', 'enablequeryrules', 'enablesorting']
+
+    getSafeStringForREST = (input) ->
+      encodeURIComponent input.replace(/'/g, '"')
+
     url = "Search/query?"
+
     for p of @
       propertyValue = @[p]
       if urlProperties.indexOf(p) > -1 and propertyValue?
         if typeof(propertyValue) is 'string'
-          url = "#{url}#{p}='#{propertyValue}'&"
+          url = "#{url}#{p}='#{getSafeStringForREST(propertyValue)}'&"
         else if typeof(propertyValue) is 'number' or typeof(propertyValue) is 'boolean'
           url = "#{url}#{p}=#{propertyValue}&"
 
@@ -112,11 +117,13 @@ root.ShareCoffee.SuggestProperties = class
   getUrl: () =>
     urlProperties = ['querytext', 'inumberofquerysuggestions', 'inumberofresultsuggestions', 'fprequerysuggestions', 'fhithighlighting', 'fcapitalizefirstletters', 'showpeoplenamesuggestions', 'culture']
     url = "Search/suggest?"
+    getSafeStringForREST = (input) ->
+      encodeURIComponent input.replace(/'/g, '"')
     for p of @
       propertyValue = @[p]
       if urlProperties.indexOf(p) > -1 and propertyValue?
         if typeof(propertyValue) is 'string'
-          url = "#{url}#{p}='#{propertyValue}'&"
+          url = "#{url}#{p}='#{getSafeStringForREST(propertyValue)}'&"
         else if typeof(propertyValue) is 'number' or typeof(propertyValue) is 'boolean'
           url = "#{url}#{p}=#{propertyValue}&"
 

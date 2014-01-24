@@ -253,6 +253,13 @@ describe 'ShareCoffee.Properties', ->
       actual.should.be.an 'string'
       actual.should.equal "Search/query?querytext='SharePoint'"
 
+     it 'should encode strings when putting them into url', ->
+      sut = new ShareCoffee.QueryProperties()
+      sut.querytext = "'SharePoint & Azure'"
+      actual = sut.getUrl()
+      actual.should.be.an 'string'
+      actual.should.equal "Search/query?querytext='%22SharePoint%20%26%20Azure%22'"
+
     it 'should escape numbers in the url as required for REST', ->
       sut = new ShareCoffee.QueryProperties()
       sut.startrow = 10
@@ -484,6 +491,13 @@ describe 'ShareCoffee.Properties', ->
       actual = sut.getUrl()
       actual.should.be.an 'string'
       actual.should.equal "Search/suggest?querytext='SharePoint'"
+
+    it 'should encode strings when putting them into url', ->
+      sut = new ShareCoffee.SuggestProperties()
+      sut.querytext = "'SharePoint & Azure'"
+      actual = sut.getUrl()
+      actual.should.be.an 'string'
+      actual.should.equal "Search/suggest?querytext='%22SharePoint%20%26%20Azure%22'"
 
     it 'should escape numbers in the url as required for REST', ->
       sut = new ShareCoffee.SuggestProperties()
