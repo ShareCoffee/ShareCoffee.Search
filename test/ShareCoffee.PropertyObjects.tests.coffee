@@ -19,6 +19,169 @@ describe 'ShareCoffee.Properties', ->
       root.ShareCoffee.should.have.property 'QueryProperties'
       root.ShareCoffee.QueryProperties.should.be.an 'function'
 
+    it 'should accept and store querytext as a ctor parameter', ->
+      actual = new ShareCoffee.QueryProperties 'SharePoint'
+      actual.should.have.property 'querytext'
+      actual.querytext.should.equal 'SharePoint'
+
+    it 'should allow to set querytext on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.querytext = 'SharePoint'
+      actual.querytext.should.equal 'SharePoint'
+    it 'should accept and store selectproperties as a ctor parameter', ->
+      actual = new ShareCoffee.QueryProperties '', 'Foo'
+      actual.should.have.property 'selectproperties'
+      actual.selectproperties.should.equal 'Foo'
+    it 'should accept and store querytemplate as a ctor parameter', ->
+      actual = new ShareCoffee.QueryProperties '', '', 'Foo'
+      actual.should.have.property 'querytemplate'
+      actual.querytemplate.should.equal 'Foo'
+
+    it 'should allow to set querytemplate on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.querytemplate = 't'
+      actual.querytemplate.should.equal 't'
+
+    it 'should allow to set enableinterleaving on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.enableinterleaving = false
+      actual.enableinterleaving.should.equal false
+
+    it 'should allow to set sourceid on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.sourceid = 't'
+      actual.sourceid.should.equal 't'
+
+    it 'should allow to set rankingmodelid on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.rankingmodelid = 't'
+      actual.rankingmodelid.should.equal 't'
+
+    it 'should allow to set startrow on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.startrow = 1
+      actual.startrow.should.equal 1
+
+    it 'should allow to set rowlimit on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.rowlimit = 2
+      actual.rowlimit.should.equal 2
+
+    it 'should allow to set rowsperpage on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.rowsperpage = 2
+      actual.rowsperpage.should.equal 2
+
+    it 'should allow to set selectproperties on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.selectproperties = 't'
+      actual.selectproperties.should.equal 't'
+
+    it 'should allow to set culture on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.culture = 1031
+      actual.culture.should.equal 1031
+
+    it 'should allow to set refiners on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.refiners = 't'
+      actual.refiners.should.equal 't'
+
+    it 'should allow to set refinementfilters on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.refinementfilters = 't'
+      actual.refinementfilters.should.equal 't'
+
+    it 'should allow to set hiddenconstraints on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.hiddenconstraints = 't'
+      actual.hiddenconstraints.should.equal 't'
+
+    it 'should allow to set sortlist on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.sortlist = 't'
+      actual.sortlist.should.equal 't'
+
+    it 'should allow to set enablestemming on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.enablestemming = false
+      actual.enablestemming.should.equal false
+
+    it 'should allow to set trimduplicates on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.trimduplicates = false
+      actual.trimduplicates.should.equal false
+
+    it 'should allow to set trimduplicatesincludeid on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.trimduplicatesincludeid = 123
+      actual.trimduplicatesincludeid.should.equal 123
+
+    it 'should allow to set timeout on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.timeout = 3000
+      actual.timeout.should.equal 3000
+
+    it 'should allow to set enablenicknames on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.enablenicknames = true
+      actual.enablenicknames.should.equal true
+
+    it 'should allow to set enablephonetic on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.enablephonetic = true
+      actual.enablephonetic.should.equal true
+
+    it 'should allow to set enablefql on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.enablefql = true
+      actual.enablefql.should.equal true
+
+    it 'should allow to set hithighlightedproperties on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.hithighlightedproperties = 't'
+      actual.hithighlightedproperties.should.equal 't'
+
+    it 'should allow to set bypassresulttypes on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.bypassresulttypes = false
+      actual.bypassresulttypes.should.equal false
+
+    it 'should allow to set processbestbets on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.processbestbets = false
+      actual.processbestbets.should.equal false
+
+    it 'should allow to set clienttype on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.clienttype = 't'
+      actual.clienttype.should.equal 't'
+
+    it 'should allow to set personalizationdata on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.personalizationdata = 't'
+      actual.personalizationdata.should.equal 't'
+
+    it 'should allow to set resultsurl on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.resultsurl = 't'
+      actual.resultsurl.should.equal 't'
+
+    it 'should allow to set querytag on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.querytag = 't'
+      actual.querytag.should.equal 't'
+
+    it 'should allow to set enablequeryrules on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.enablequeryrules = false
+      actual.enablequeryrules.should.equal false
+
+    it 'should allow to set enablesorting on an existing instance', ->
+      actual = new ShareCoffee.QueryProperties()
+      actual.enablesorting = false
+      actual.enablesorting.should.equal false
+
     it 'should expose a getRequestProperties method on an QueryProperties instance', ->
       sut = new ShareCoffee.QueryProperties()
       sut.should.have.property 'getRequestProperties'

@@ -5,12 +5,43 @@ if not root.ShareCoffee?
 
 root.ShareCoffee.QueryProperties = class
 
-  constructor: (@querytext, @startrow, @trimduplicates) ->
+  constructor: (@querytext, @selectproperties, @querytemplate) ->
+    @querytemplate = null unless @querytemplate?
+    @enableinterleaving = null unless @enableinterleaving?
+    @sourceid = null unless @sourceid?
+    @rankingmodelid = null unless @rankingmodelid?
     @startrow = null unless @startrow?
-    @trimduplicates = null unless @trimduplicates
+    @rowlimit = null unless @rowlimit?
+    @rowsperpage = null unless @rowsperpage?
+    @selectproperties = null unless @selectproperties?
+    @culture = null unless @culture?
+    @refiners = null unless @refiners?
+    @refinementfilters = null unless @refinementfilters?
+    @hiddenconstraints = null unless @hiddenconstraints?
+    @sortlist = null unless @sortlist?
+    @enablestemming = null unless @enablestemming?
+    @trimduplicates = null unless @trimduplicates?
+    @trimduplicatesincludeid = null unless @trimduplicatesincludeid?
+    @timeout = null unless @timeout?
+    @enablenicknames = null unless @enablenicknames?
+    @enablephonetic = null unless @enablephonetic?
+    @enablefql = null unless @enablefql?
+    @hithighlightedproperties = null unless @hithighlightedproperties?
+    @bypassresulttypes = null unless @bypassresulttypes?
+    @processbestbets = null  unless @processbestbets?
+    @clienttype = null unless @clienttype?
+    @personalizationdata = null unless @personalizationdata?
+    @resultsurl = null unless @resultsurl?
+    @querytag = null unless @querytag?
+    @enablequeryrules = null unless @enablequeryrules?
+    @enablesorting = null unless @enablesorting?
+
 
   getUrl: () =>
-    urlProperties = ['querytext', 'startrow', 'trimduplicates']
+    urlProperties = ['querytext', 'querytemplate', 'enableinterleaving', 'sourceid', 'rankingmodelid', 'startrow', 'rowlimit', 'rowsperpage', 'selectproperties',
+    'culture', 'refiners', 'refinementfilters', 'hiddenconstraints', 'sortlist', 'enablestemming', 'trimduplicates', 'trimduplicatesincludeid',
+    'timeout', 'enablenicknames', 'enablephonetic', 'enablefql', 'hithighlightedproperties', 'bypassresulttypes',
+    'processbestbets', 'clienttype', 'personalizationdata', 'resultsurl', 'querytag', 'enablequeryrules', 'enablesorting']
     url = "Search/query?"
     for p of @
       propertyValue = @[p]
