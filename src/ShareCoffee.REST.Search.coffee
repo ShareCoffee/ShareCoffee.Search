@@ -3,7 +3,8 @@ root = global ? window
 if not root.ShareCoffee? or not root.ShareCoffee.REST?
 	throw new Error("LoadError")
 
-root.ShareCoffee.MaxUrlLength = 100
+# based on RFC2616 - HTTP specs
+root.ShareCoffee.MaxUrlLength = 2000
 
 root.ShareCoffee.REST.Search =
 	build:
