@@ -298,19 +298,19 @@ describe 'ShareCoffee.Properties', ->
 
       expected =
         request:
-          QueryText: "SharePoint"
+          Querytext: "SharePoint"
           RowLimit: 20
           StartRow: 10
           EnableFQL: true
 
       sut = new ShareCoffee.PostQueryProperties()
-      sut.QueryText = "SharePoint"
+      sut.Querytext = "SharePoint"
       sut.EnableFQL = true
       sut.StartRow = 10
       sut.RowLimit = 20
       actual = sut.getRequestProperties()
       spy.args[0][1].should.have.property 'request'
-      spy.args[0][1].request.should.have.property 'QueryText'
+      spy.args[0][1].request.should.have.property 'Querytext'
       spy.args[0][1].request.should.have.property 'RowLimit'
       spy.args[0][1].request.should.have.property 'StartRow'
       spy.args[0][1].request.should.have.property 'EnableFQL'

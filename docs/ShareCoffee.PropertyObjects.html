@@ -130,22 +130,72 @@ root.ShareCoffee.QueryProperties = <span class="hljs-class"><span class="hljs-ke
     <span class="hljs-keyword">if</span> url.length &gt; ShareCoffee.MaxUrlLength
       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error <span class="hljs-string">'URL is to long, please use a PostQuery instead of a regular GET Query'</span>
 
-root.ShareCoffee.PostQueryProperties = <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">root</span>.<span class="hljs-title">ShareCoffee</span>.<span class="hljs-title">QueryProperties</span></span>
+root.ShareCoffee.PostQueryProperties = <span class="hljs-class"><span class="hljs-keyword">class</span></span>
 
-  <span class="hljs-attribute">constructor</span>: <span class="hljs-function"><span class="hljs-params">(<span class="hljs-property">@querytext</span>, <span class="hljs-property">@selectproperties</span>, <span class="hljs-property">@querytemplate</span>)</span> -&gt;</span>
-    <span class="hljs-keyword">super</span>(<span class="hljs-property">@querytext</span>, <span class="hljs-property">@selectproperties</span>, <span class="hljs-property">@querytemplate</span>)
+  <span class="hljs-attribute">constructor</span>: <span class="hljs-function"><span class="hljs-params">(<span class="hljs-property">@Querytext</span>, <span class="hljs-property">@SelectProperties</span>, <span class="hljs-property">@QueryTemplate</span>)</span> -&gt;</span>
     <span class="hljs-property">@isPostQuery</span> = <span class="hljs-literal">true</span>
+    <span class="hljs-property">@Querytext</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@Querytext</span>?
+    <span class="hljs-property">@Culture</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@Culture</span>?
+    <span class="hljs-property">@EnableIterleaving</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@EnableIterleaving</span>?
+    <span class="hljs-property">@EnableNicknames</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@EnableNicknames</span>?
+    <span class="hljs-property">@EnablePhonetic</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@EnablePhonetic</span>?
+    <span class="hljs-property">@EnableStemming</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@EnableStemming</span>?
+    <span class="hljs-property">@HiddenConstraints</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@HiddenConstraints</span>?
+    <span class="hljs-property">@RankingModelId</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@RankingModelId</span>?
+    <span class="hljs-property">@RefinementFilters</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@RefinementFilters</span>?
+    <span class="hljs-property">@Refiners</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@Refiners</span>?
+    <span class="hljs-property">@RowLimit</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@RowLimit</span>?
+    <span class="hljs-property">@RowsPerPage</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@RowsPerPage</span>?
+    <span class="hljs-property">@SelectProperties</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@SelectProperties</span>?
+    <span class="hljs-property">@SourceId</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@SourceId</span>?
+    <span class="hljs-property">@StartRow</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@StartRow</span>?
+    <span class="hljs-property">@Timeout</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@Timeout</span>?
+    <span class="hljs-property">@TrimDuplicates</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@TrimDuplicates</span>?
+    <span class="hljs-property">@EnableFQL</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@EnableFQL</span>?
+    <span class="hljs-property">@BypassResultTypes</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@BypassResultTypes</span>?
+    <span class="hljs-property">@ClientType</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@ClientType</span>?
+    <span class="hljs-property">@HitHighlightedProperties</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@HitHighlightedProperties</span>?
+    <span class="hljs-property">@ProcessBestBets</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@ProcessBestBets</span>?
+    <span class="hljs-property">@QueryTag</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@QueryTag</span>?
+    <span class="hljs-property">@ResultsUrl</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@ResultsUrl</span>?
+    <span class="hljs-property">@TrimDuplicatesIncludeId</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@TrimDuplicatesIncludeId</span>?
+    <span class="hljs-property">@BlockDedupeMode</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@BlockDedupeMode</span>?
+    <span class="hljs-property">@CollapseSpecification</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@CollapseSpecification</span>?
+    <span class="hljs-property">@DesiredSnippetLength</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@DesiredSnippetLength</span>?
+    <span class="hljs-property">@EnableOrderingHitHighlightedProperty</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@EnableOrderingHitHighlightedProperty</span>?
+    <span class="hljs-property">@EnableQueryRules</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@EnableQueryRules</span>?
+    <span class="hljs-property">@EnableSorting</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@EnableSorting</span>?
+    <span class="hljs-property">@GenerateBlockRankLog</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@GenerateBlockRankLog</span>?
+    <span class="hljs-property">@HitHighlightedMultivaluePropertyLimit</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@HitHighlightedMultivaluePropertyLimit</span>?
+    <span class="hljs-property">@ImpressionId</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@ImpressionId</span>?
+    <span class="hljs-property">@MaxSnippetLength</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@MaxSnippetLength</span>?
+    <span class="hljs-property">@PersonalizationData</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@PersonalizationData</span>?
+    <span class="hljs-property">@ProcessPersonalFavorites</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@ProcessPersonalFavorites</span>?
+    <span class="hljs-property">@Properties</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@Properties</span>?
+    <span class="hljs-property">@QueryTemplate</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@QueryTemplate</span>?
+    <span class="hljs-property">@ReorderingRules</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@ReorderingRules</span>?
+    <span class="hljs-property">@SortList</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@SortList</span>?
+    <span class="hljs-property">@SummaryLength</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@SummaryLength</span>?
+    <span class="hljs-property">@TotalRowsExactMinimum</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@TotalRowsExactMinimum</span>?
+    <span class="hljs-property">@UILanguage</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@UILanguage</span>?
+    <span class="hljs-property">@QueryTemplatePropertiesUrl</span> = <span class="hljs-literal">null</span> <span class="hljs-keyword">unless</span> <span class="hljs-property">@QueryTemplatePropertiesUrl</span>?
+
+
 
   <span class="hljs-attribute">getRequestProperties</span>: <span class="hljs-function"><span class="hljs-params">()</span> -&gt;</span>
-    payload = {}
-    urlProperties = [<span class="hljs-string">'querytext'</span>, <span class="hljs-string">'querytemplate'</span>, <span class="hljs-string">'enableinterleaving'</span>, <span class="hljs-string">'sourceid'</span>, <span class="hljs-string">'rankingmodelid'</span>, <span class="hljs-string">'startrow'</span>, <span class="hljs-string">'rowlimit'</span>, <span class="hljs-string">'rowsperpage'</span>, <span class="hljs-string">'selectproperties'</span>,
-    <span class="hljs-string">'culture'</span>, <span class="hljs-string">'refiners'</span>, <span class="hljs-string">'refinementfilters'</span>, <span class="hljs-string">'hiddenconstraints'</span>, <span class="hljs-string">'sortlist'</span>, <span class="hljs-string">'enablestemming'</span>, <span class="hljs-string">'trimduplicates'</span>, <span class="hljs-string">'trimduplicatesincludeid'</span>,
-    <span class="hljs-string">'timeout'</span>, <span class="hljs-string">'enablenicknames'</span>, <span class="hljs-string">'enablephonetic'</span>, <span class="hljs-string">'enablefql'</span>, <span class="hljs-string">'hithighlightedproperties'</span>, <span class="hljs-string">'bypassresulttypes'</span>,
-    <span class="hljs-string">'processbestbets'</span>, <span class="hljs-string">'clienttype'</span>, <span class="hljs-string">'personalizationdata'</span>, <span class="hljs-string">'resultsurl'</span>, <span class="hljs-string">'querytag'</span>, <span class="hljs-string">'enablequeryrules'</span>, <span class="hljs-string">'enablesorting'</span>]
+    payload = {
+      <span class="hljs-string">'request'</span>: {
+      }
+    }
+    urlProperties = [<span class="hljs-string">'Querytext'</span>,<span class="hljs-string">'Culture'</span>,<span class="hljs-string">'EnableIterleaving'</span>,<span class="hljs-string">'EnableNicknames'</span>,<span class="hljs-string">'EnablePhonetic'</span>,<span class="hljs-string">'EnableStemming'</span>,<span class="hljs-string">'HiddenConstraints'</span>,<span class="hljs-string">'RankingModelId'</span>,<span class="hljs-string">'RefinementFilters'</span>,<span class="hljs-string">'Refiners'</span>,<span class="hljs-string">'RowLimit'</span>,<span class="hljs-string">'RowsPerPage'</span>,<span class="hljs-string">'SelectProperties'</span>,<span class="hljs-string">'SourceId'</span>,<span class="hljs-string">'StartRow'</span>,<span class="hljs-string">'Timeout'</span>, <span class="hljs-string">'TrimDuplicates'</span>,<span class="hljs-string">'EnableFQL'</span>,<span class="hljs-string">'BypassResultTypes'</span>,<span class="hljs-string">'ClientType'</span>,<span class="hljs-string">'HitHighlightedProperties'</span>,<span class="hljs-string">'ProcessBestBets'</span>,<span class="hljs-string">'QueryTag'</span>,<span class="hljs-string">'ResultsUrl'</span>,
+      <span class="hljs-string">'TrimDuplicatesIncludeId'</span>,<span class="hljs-string">'BlockDedupeMode'</span>,<span class="hljs-string">'CollapseSpecification'</span>,<span class="hljs-string">'DesiredSnippetLength'</span>,<span class="hljs-string">'EnableOrderingHitHighlightedProperty'</span>,<span class="hljs-string">'EnableQueryRules'</span>,<span class="hljs-string">'EnableSorting'</span>,<span class="hljs-string">'GenerateBlockRankLog'</span>,
+      <span class="hljs-string">'HitHighlightedMultivaluePropertyLimit'</span>,<span class="hljs-string">'ImpressionId'</span>,<span class="hljs-string">'MaxSnippetLength'</span>,<span class="hljs-string">'PersonalizationData'</span>,<span class="hljs-string">'ProcessPersonalFavorites'</span>,
+      <span class="hljs-string">'Properties'</span>,<span class="hljs-string">'QueryTemplate'</span>,<span class="hljs-string">'ReorderingRules'</span>,<span class="hljs-string">'SortList'</span>,<span class="hljs-string">'SummaryLength'</span>,<span class="hljs-string">'TotalRowsExactMinimum'</span>,<span class="hljs-string">'UILanguage'</span>,<span class="hljs-string">'QueryTemplatePropertiesUrl'</span>]
+
     <span class="hljs-keyword">for</span> p <span class="hljs-keyword">of</span> @
       propertyValue = @[p]
       <span class="hljs-keyword">if</span> urlProperties.indexOf(p) &gt; -<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> propertyValue?
-        payload[p] = @[p]
+        payload[<span class="hljs-string">'request'</span>][p] = @[p]
 
     <span class="hljs-keyword">new</span> ShareCoffee.REST.RequestProperties <span class="hljs-string">"Search/postQuery"</span>, payload, <span class="hljs-property">@hostWebUrl</span>, <span class="hljs-literal">null</span>, <span class="hljs-property">@onSuccess</span>, <span class="hljs-property">@onError</span>
 

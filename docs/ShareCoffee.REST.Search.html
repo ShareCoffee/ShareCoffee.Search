@@ -54,9 +54,14 @@
           <div class='highlight'><pre>root = <span class="hljs-built_in">global</span> ? <span class="hljs-built_in">window</span>
 
 <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root.ShareCoffee? <span class="hljs-keyword">or</span> <span class="hljs-keyword">not</span> root.ShareCoffee.REST?
-	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">"LoadError"</span>)
+	<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> Error(<span class="hljs-string">"LoadError"</span>)</pre></div>
+        
+      
+        
+        <p>based on RFC2616 - HTTP specs</p>
 
-root.ShareCoffee.MaxUrlLength = <span class="hljs-number">100</span>
+        
+          <div class='highlight'><pre>root.ShareCoffee.MaxUrlLength = <span class="hljs-number">2000</span>
 
 root.ShareCoffee.REST.Search =
 	<span class="hljs-attribute">build</span>:

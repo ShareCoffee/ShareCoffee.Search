@@ -6,9 +6,7 @@ ShareCoffee.Search (c) 2014 Thorsten Hans
 
 (function() {
   var root,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
   root = typeof global !== "undefined" && global !== null ? global : window;
 
@@ -182,25 +180,159 @@ ShareCoffee.Search (c) 2014 Thorsten Hans
 
   })();
 
-  root.ShareCoffee.PostQueryProperties = (function(_super) {
-    __extends(_Class, _super);
-
-    function _Class(querytext, selectproperties, querytemplate) {
-      this.querytext = querytext;
-      this.selectproperties = selectproperties;
-      this.querytemplate = querytemplate;
-      _Class.__super__.constructor.call(this, this.querytext, this.selectproperties, this.querytemplate);
+  root.ShareCoffee.PostQueryProperties = (function() {
+    function _Class(Querytext, SelectProperties, QueryTemplate) {
+      this.Querytext = Querytext;
+      this.SelectProperties = SelectProperties;
+      this.QueryTemplate = QueryTemplate;
       this.isPostQuery = true;
+      if (this.Querytext == null) {
+        this.Querytext = null;
+      }
+      if (this.Culture == null) {
+        this.Culture = null;
+      }
+      if (this.EnableIterleaving == null) {
+        this.EnableIterleaving = null;
+      }
+      if (this.EnableNicknames == null) {
+        this.EnableNicknames = null;
+      }
+      if (this.EnablePhonetic == null) {
+        this.EnablePhonetic = null;
+      }
+      if (this.EnableStemming == null) {
+        this.EnableStemming = null;
+      }
+      if (this.HiddenConstraints == null) {
+        this.HiddenConstraints = null;
+      }
+      if (this.RankingModelId == null) {
+        this.RankingModelId = null;
+      }
+      if (this.RefinementFilters == null) {
+        this.RefinementFilters = null;
+      }
+      if (this.Refiners == null) {
+        this.Refiners = null;
+      }
+      if (this.RowLimit == null) {
+        this.RowLimit = null;
+      }
+      if (this.RowsPerPage == null) {
+        this.RowsPerPage = null;
+      }
+      if (this.SelectProperties == null) {
+        this.SelectProperties = null;
+      }
+      if (this.SourceId == null) {
+        this.SourceId = null;
+      }
+      if (this.StartRow == null) {
+        this.StartRow = null;
+      }
+      if (this.Timeout == null) {
+        this.Timeout = null;
+      }
+      if (this.TrimDuplicates == null) {
+        this.TrimDuplicates = null;
+      }
+      if (this.EnableFQL == null) {
+        this.EnableFQL = null;
+      }
+      if (this.BypassResultTypes == null) {
+        this.BypassResultTypes = null;
+      }
+      if (this.ClientType == null) {
+        this.ClientType = null;
+      }
+      if (this.HitHighlightedProperties == null) {
+        this.HitHighlightedProperties = null;
+      }
+      if (this.ProcessBestBets == null) {
+        this.ProcessBestBets = null;
+      }
+      if (this.QueryTag == null) {
+        this.QueryTag = null;
+      }
+      if (this.ResultsUrl == null) {
+        this.ResultsUrl = null;
+      }
+      if (this.TrimDuplicatesIncludeId == null) {
+        this.TrimDuplicatesIncludeId = null;
+      }
+      if (this.BlockDedupeMode == null) {
+        this.BlockDedupeMode = null;
+      }
+      if (this.CollapseSpecification == null) {
+        this.CollapseSpecification = null;
+      }
+      if (this.DesiredSnippetLength == null) {
+        this.DesiredSnippetLength = null;
+      }
+      if (this.EnableOrderingHitHighlightedProperty == null) {
+        this.EnableOrderingHitHighlightedProperty = null;
+      }
+      if (this.EnableQueryRules == null) {
+        this.EnableQueryRules = null;
+      }
+      if (this.EnableSorting == null) {
+        this.EnableSorting = null;
+      }
+      if (this.GenerateBlockRankLog == null) {
+        this.GenerateBlockRankLog = null;
+      }
+      if (this.HitHighlightedMultivaluePropertyLimit == null) {
+        this.HitHighlightedMultivaluePropertyLimit = null;
+      }
+      if (this.ImpressionId == null) {
+        this.ImpressionId = null;
+      }
+      if (this.MaxSnippetLength == null) {
+        this.MaxSnippetLength = null;
+      }
+      if (this.PersonalizationData == null) {
+        this.PersonalizationData = null;
+      }
+      if (this.ProcessPersonalFavorites == null) {
+        this.ProcessPersonalFavorites = null;
+      }
+      if (this.Properties == null) {
+        this.Properties = null;
+      }
+      if (this.QueryTemplate == null) {
+        this.QueryTemplate = null;
+      }
+      if (this.ReorderingRules == null) {
+        this.ReorderingRules = null;
+      }
+      if (this.SortList == null) {
+        this.SortList = null;
+      }
+      if (this.SummaryLength == null) {
+        this.SummaryLength = null;
+      }
+      if (this.TotalRowsExactMinimum == null) {
+        this.TotalRowsExactMinimum = null;
+      }
+      if (this.UILanguage == null) {
+        this.UILanguage = null;
+      }
+      if (this.QueryTemplatePropertiesUrl == null) {
+        this.QueryTemplatePropertiesUrl = null;
+      }
     }
 
     _Class.prototype.getRequestProperties = function() {
       var p, payload, propertyValue, urlProperties;
-      payload = {};
-      urlProperties = ['querytext', 'querytemplate', 'enableinterleaving', 'sourceid', 'rankingmodelid', 'startrow', 'rowlimit', 'rowsperpage', 'selectproperties', 'culture', 'refiners', 'refinementfilters', 'hiddenconstraints', 'sortlist', 'enablestemming', 'trimduplicates', 'trimduplicatesincludeid', 'timeout', 'enablenicknames', 'enablephonetic', 'enablefql', 'hithighlightedproperties', 'bypassresulttypes', 'processbestbets', 'clienttype', 'personalizationdata', 'resultsurl', 'querytag', 'enablequeryrules', 'enablesorting'];
+      payload = {
+        'request': {}
+      };
+      urlProperties = ['Querytext', 'Culture', 'EnableIterleaving', 'EnableNicknames', 'EnablePhonetic', 'EnableStemming', 'HiddenConstraints', 'RankingModelId', 'RefinementFilters', 'Refiners', 'RowLimit', 'RowsPerPage', 'SelectProperties', 'SourceId', 'StartRow', 'Timeout', 'TrimDuplicates', 'EnableFQL', 'BypassResultTypes', 'ClientType', 'HitHighlightedProperties', 'ProcessBestBets', 'QueryTag', 'ResultsUrl', 'TrimDuplicatesIncludeId', 'BlockDedupeMode', 'CollapseSpecification', 'DesiredSnippetLength', 'EnableOrderingHitHighlightedProperty', 'EnableQueryRules', 'EnableSorting', 'GenerateBlockRankLog', 'HitHighlightedMultivaluePropertyLimit', 'ImpressionId', 'MaxSnippetLength', 'PersonalizationData', 'ProcessPersonalFavorites', 'Properties', 'QueryTemplate', 'ReorderingRules', 'SortList', 'SummaryLength', 'TotalRowsExactMinimum', 'UILanguage', 'QueryTemplatePropertiesUrl'];
       for (p in this) {
         propertyValue = this[p];
         if (urlProperties.indexOf(p) > -1 && (propertyValue != null)) {
-          payload[p] = this[p];
+          payload['request'][p] = this[p];
         }
       }
       return new ShareCoffee.REST.RequestProperties("Search/postQuery", payload, this.hostWebUrl, null, this.onSuccess, this.onError);
@@ -208,7 +340,7 @@ ShareCoffee.Search (c) 2014 Thorsten Hans
 
     return _Class;
 
-  })(root.ShareCoffee.QueryProperties);
+  })();
 
   root.ShareCoffee.SuggestProperties = (function() {
     function _Class(querytext, inumberofquerysuggestions, inumberofresultsuggestions, fprequerysuggestions, fhithighlighting, fcapitalizefirstletters, showpeoplenamesuggestions, culture) {
@@ -285,7 +417,7 @@ ShareCoffee.Search (c) 2014 Thorsten Hans
     throw new Error("LoadError");
   }
 
-  root.ShareCoffee.MaxUrlLength = 100;
+  root.ShareCoffee.MaxUrlLength = 2000;
 
   root.ShareCoffee.REST.Search = {
     build: {

@@ -79,9 +79,9 @@ root.ShareCoffee.QueryProperties = class
 
 root.ShareCoffee.PostQueryProperties = class
 
-  constructor: (@QueryText, @SelectProperties, @QueryTemplate) ->
+  constructor: (@Querytext, @SelectProperties, @QueryTemplate) ->
     @isPostQuery = true
-    @QueryText = null unless @QueryText?
+    @Querytext = null unless @Querytext?
     @Culture = null unless @Culture?
     @EnableIterleaving = null unless @EnableIterleaving?
     @EnableNicknames = null unless @EnableNicknames?
@@ -134,7 +134,7 @@ root.ShareCoffee.PostQueryProperties = class
       'request': {
       }
     }
-    urlProperties = ['QueryText','Culture','EnableIterleaving','EnableNicknames','EnablePhonetic','EnableStemming','HiddenConstraints','RankingModelId','RefinementFilters','Refiners','RowLimit','RowsPerPage','SelectProperties','SourceId','StartRow','Timeout', 'TrimDuplicates','EnableFQL','BypassResultTypes','ClientType','HitHighlightedProperties','ProcessBestBets','QueryTag','ResultsUrl',
+    urlProperties = ['Querytext','Culture','EnableIterleaving','EnableNicknames','EnablePhonetic','EnableStemming','HiddenConstraints','RankingModelId','RefinementFilters','Refiners','RowLimit','RowsPerPage','SelectProperties','SourceId','StartRow','Timeout', 'TrimDuplicates','EnableFQL','BypassResultTypes','ClientType','HitHighlightedProperties','ProcessBestBets','QueryTag','ResultsUrl',
       'TrimDuplicatesIncludeId','BlockDedupeMode','CollapseSpecification','DesiredSnippetLength','EnableOrderingHitHighlightedProperty','EnableQueryRules','EnableSorting','GenerateBlockRankLog',
       'HitHighlightedMultivaluePropertyLimit','ImpressionId','MaxSnippetLength','PersonalizationData','ProcessPersonalFavorites',
       'Properties','QueryTemplate','ReorderingRules','SortList','SummaryLength','TotalRowsExactMinimum','UILanguage','QueryTemplatePropertiesUrl']
