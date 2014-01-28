@@ -77,22 +77,72 @@ root.ShareCoffee.QueryProperties = class
     if url.length > ShareCoffee.MaxUrlLength
       throw new Error 'URL is to long, please use a PostQuery instead of a regular GET Query'
 
-root.ShareCoffee.PostQueryProperties = class extends root.ShareCoffee.QueryProperties
+root.ShareCoffee.PostQueryProperties = class
 
-  constructor: (@querytext, @selectproperties, @querytemplate) ->
-    super(@querytext, @selectproperties, @querytemplate)
+  constructor: (@QueryText, @SelectProperties, @QueryTemplate) ->
     @isPostQuery = true
+    @QueryText = null unless @QueryText?
+    @Culture = null unless @Culture?
+    @EnableIterleaving = null unless @EnableIterleaving?
+    @EnableNicknames = null unless @EnableNicknames?
+    @EnablePhonetic = null unless @EnablePhonetic?
+    @EnableStemming = null unless @EnableStemming?
+    @HiddenConstraints = null unless @HiddenConstraints?
+    @RankingModelId = null unless @RankingModelId?
+    @RefinementFilters = null unless @RefinementFilters?
+    @Refiners = null unless @Refiners?
+    @RowLimit = null unless @RowLimit?
+    @RowsPerPage = null unless @RowsPerPage?
+    @SelectProperties = null unless @SelectProperties?
+    @SourceId = null unless @SourceId?
+    @StartRow = null unless @StartRow?
+    @Timeout = null unless @Timeout?
+    @TrimDuplicates = null unless @TrimDuplicates?
+    @EnableFQL = null unless @EnableFQL?
+    @BypassResultTypes = null unless @BypassResultTypes?
+    @ClientType = null unless @ClientType?
+    @HitHighlightedProperties = null unless @HitHighlightedProperties?
+    @ProcessBestBets = null unless @ProcessBestBets?
+    @QueryTag = null unless @QueryTag?
+    @ResultsUrl = null unless @ResultsUrl?
+    @TrimDuplicatesIncludeId = null unless @TrimDuplicatesIncludeId?
+    @BlockDedupeMode = null unless @BlockDedupeMode?
+    @CollapseSpecification = null unless @CollapseSpecification?
+    @DesiredSnippetLength = null unless @DesiredSnippetLength?
+    @EnableOrderingHitHighlightedProperty = null unless @EnableOrderingHitHighlightedProperty?
+    @EnableQueryRules = null unless @EnableQueryRules?
+    @EnableSorting = null unless @EnableSorting?
+    @GenerateBlockRankLog = null unless @GenerateBlockRankLog?
+    @HitHighlightedMultivaluePropertyLimit = null unless @HitHighlightedMultivaluePropertyLimit?
+    @ImpressionId = null unless @ImpressionId?
+    @MaxSnippetLength = null unless @MaxSnippetLength?
+    @PersonalizationData = null unless @PersonalizationData?
+    @ProcessPersonalFavorites = null unless @ProcessPersonalFavorites?
+    @Properties = null unless @Properties?
+    @QueryTemplate = null unless @QueryTemplate?
+    @ReorderingRules = null unless @ReorderingRules?
+    @SortList = null unless @SortList?
+    @SummaryLength = null unless @SummaryLength?
+    @TotalRowsExactMinimum = null unless @TotalRowsExactMinimum?
+    @UILanguage = null unless @UILanguage?
+    @QueryTemplatePropertiesUrl = null unless @QueryTemplatePropertiesUrl?
+
+
 
   getRequestProperties: () ->
-    payload = {}
-    urlProperties = ['querytext', 'querytemplate', 'enableinterleaving', 'sourceid', 'rankingmodelid', 'startrow', 'rowlimit', 'rowsperpage', 'selectproperties',
-    'culture', 'refiners', 'refinementfilters', 'hiddenconstraints', 'sortlist', 'enablestemming', 'trimduplicates', 'trimduplicatesincludeid',
-    'timeout', 'enablenicknames', 'enablephonetic', 'enablefql', 'hithighlightedproperties', 'bypassresulttypes',
-    'processbestbets', 'clienttype', 'personalizationdata', 'resultsurl', 'querytag', 'enablequeryrules', 'enablesorting']
+    payload = {
+      'request': {
+      }
+    }
+    urlProperties = ['QueryText','Culture','EnableIterleaving','EnableNicknames','EnablePhonetic','EnableStemming','HiddenConstraints','RankingModelId','RefinementFilters','Refiners','RowLimit','RowsPerPage','SelectProperties','SourceId','StartRow','Timeout', 'TrimDuplicates','EnableFQL','BypassResultTypes','ClientType','HitHighlightedProperties','ProcessBestBets','QueryTag','ResultsUrl',
+      'TrimDuplicatesIncludeId','BlockDedupeMode','CollapseSpecification','DesiredSnippetLength','EnableOrderingHitHighlightedProperty','EnableQueryRules','EnableSorting','GenerateBlockRankLog',
+      'HitHighlightedMultivaluePropertyLimit','ImpressionId','MaxSnippetLength','PersonalizationData','ProcessPersonalFavorites',
+      'Properties','QueryTemplate','ReorderingRules','SortList','SummaryLength','TotalRowsExactMinimum','UILanguage','QueryTemplatePropertiesUrl']
+
     for p of @
       propertyValue = @[p]
       if urlProperties.indexOf(p) > -1 and propertyValue?
-        payload[p] = @[p]
+        payload['request'][p] = @[p]
 
     new ShareCoffee.REST.RequestProperties "Search/postQuery", payload, @hostWebUrl, null, @onSuccess, @onError
 

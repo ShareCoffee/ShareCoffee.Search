@@ -288,12 +288,6 @@ describe 'ShareCoffee.Properties', ->
       root.ShareCoffee.should.have.property 'PostQueryProperties'
       root.ShareCoffee.PostQueryProperties.should.be.an 'function'
 
-    it 'should be inherited from QueryProerties', ->
-      sut = new ShareCoffee.PostQueryProperties()
-      sut.should.have.property 'isPostQuery'
-      sut.should.have.property 'querytext'
-      #....
-
     it 'should set isPostQuery to true', ->
       sut = new ShareCoffee.PostQueryProperties()
       sut.isPostQuery.should.be.true
@@ -303,19 +297,26 @@ describe 'ShareCoffee.Properties', ->
       spy = sinon.spy ShareCoffee.REST, "RequestProperties"
 
       expected =
-        querytext: "SharePoint"
-        enablefql: true
-        startrow: 10
-        rowlimit: 20
+        request:
+          QueryText: "SharePoint"
+          RowLimit: 20
+          StartRow: 10
+          EnableFQL: true
 
       sut = new ShareCoffee.PostQueryProperties()
-      sut.querytext = "SharePoint"
-      sut.enablefql = true
-      sut.startrow = 10
-      sut.rowlimit = 20
+      sut.QueryText = "SharePoint"
+      sut.EnableFQL = true
+      sut.StartRow = 10
+      sut.RowLimit = 20
       actual = sut.getRequestProperties()
+      spy.args[0][1].should.have.property 'request'
+      spy.args[0][1].request.should.have.property 'QueryText'
+      spy.args[0][1].request.should.have.property 'RowLimit'
+      spy.args[0][1].request.should.have.property 'StartRow'
+      spy.args[0][1].request.should.have.property 'EnableFQL'
       spy.calledOnce.should.be.true
-      spy.calledWithExactly('Search/postQuery', expected, null, null, null, null).should.be.true
+
+
       ShareCoffee.REST.RequestProperties.restore()
 
   describe 'ShareCoffee.SuggestProperties', ->
