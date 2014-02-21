@@ -2,6 +2,10 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
   <metadata>
     <id>ShareCoffee.Search</id>
+    <title>ShareCoffee.Search</title>
+    <releaseNotes>See readme.txt</releaseNotes>
+    <projectUrl>https://github.com/ThorstenHans/ShareCoffee.Search</projectUrl>
+    <tags>SharePoint Apps JavaScript CoffeeScript TypeScript Office365 SPO REST CSOM JSOM Search</tags>
     <version>0.0.2</version>
     <authors>Thorsten Hans</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
