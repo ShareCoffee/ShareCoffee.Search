@@ -10,29 +10,21 @@ ShareCoffee.Search (c) 2014 Thorsten Hans
 
   root = typeof global !== "undefined" && global !== null ? global : window;
 
-  if ((root.ShareCoffee == null) || (root.ShareCoffee.CrossDomain == null)) {
-    throw new Error("LoadError");
-  }
-
-  root.ShareCoffee.CrossDomain.Search = {
-    build: {
-      query: {
-        "for": new ShareCoffee.CrossDomainRESTFactory('GET')
-      },
-      postQuery: {
-        "for": new ShareCoffee.CrossDomainRESTFactory('POST')
-      },
-      suggest: {
-        "for": new ShareCoffee.CrossDomainRESTFactory('GET')
-      }
-    }
-  };
-
-  root = typeof global !== "undefined" && global !== null ? global : window;
-
   if (root.ShareCoffee == null) {
     throw new Error("LoadError");
   }
+
+  root.ShareCoffee.MaxUrlLength = 2000;
+
+  if (root.ShareCoffee.Url == null) {
+    root.ShareCoffee.Url = {};
+  }
+
+  root.ShareCoffee.Url.Query = "Search/query";
+
+  root.ShareCoffee.Url.PostQuery = "Search/postquery";
+
+  root.ShareCoffee.Url.Suggest = "Search/suggest";
 
   root.ShareCoffee.QueryProperties = (function() {
     function _Class(querytext, selectproperties, querytemplate) {
@@ -144,7 +136,7 @@ ShareCoffee.Search (c) 2014 Thorsten Hans
       getSafeStringForREST = function(input) {
         return encodeURIComponent(input.replace(/'/g, '"'));
       };
-      url = "Search/query?";
+      url = "" + ShareCoffee.Url.Query + "?";
       for (p in this) {
         propertyValue = this[p];
         if (urlProperties.indexOf(p) > -1 && (propertyValue != null)) {
@@ -335,7 +327,7 @@ ShareCoffee.Search (c) 2014 Thorsten Hans
           payload['request'][p] = this[p];
         }
       }
-      return new ShareCoffee.REST.RequestProperties("Search/postQuery", payload, this.hostWebUrl, null, this.onSuccess, this.onError);
+      return new ShareCoffee.REST.RequestProperties(ShareCoffee.Url.PostQuery, payload, this.hostWebUrl, null, this.onSuccess, this.onError);
     };
 
     return _Class;
@@ -390,7 +382,7 @@ ShareCoffee.Search (c) 2014 Thorsten Hans
     _Class.prototype.getUrl = function() {
       var getSafeStringForREST, p, propertyValue, url, urlProperties;
       urlProperties = ['querytext', 'inumberofquerysuggestions', 'inumberofresultsuggestions', 'fprequerysuggestions', 'fhithighlighting', 'fcapitalizefirstletters', 'showpeoplenamesuggestions', 'culture'];
-      url = "Search/suggest?";
+      url = "" + ShareCoffee.Url.Suggest + "?";
       getSafeStringForREST = function(input) {
         return encodeURIComponent(input.replace(/'/g, '"'));
       };
@@ -410,28 +402,6 @@ ShareCoffee.Search (c) 2014 Thorsten Hans
     return _Class;
 
   })();
-
-  root = typeof global !== "undefined" && global !== null ? global : window;
-
-  if ((root.ShareCoffee == null) || (root.ShareCoffee.REST == null)) {
-    throw new Error("LoadError");
-  }
-
-  root.ShareCoffee.MaxUrlLength = 2000;
-
-  root.ShareCoffee.REST.Search = {
-    build: {
-      query: {
-        "for": new ShareCoffee.RESTFactory('GET')
-      },
-      postQuery: {
-        "for": new ShareCoffee.RESTFactory('POST')
-      },
-      suggest: {
-        "for": new ShareCoffee.RESTFactory('GET')
-      }
-    }
-  };
 
 }).call(this);
 

@@ -5,24 +5,16 @@ ShareCoffee.Search (c) 2014 Thorsten Hans
 
 root = global ? window
 
-if not root.ShareCoffee? or not root.ShareCoffee.CrossDomain?
-	throw new Error("LoadError")
-
-
-root.ShareCoffee.CrossDomain.Search =
-	build:
-		query:
-			for: new ShareCoffee.CrossDomainRESTFactory 'GET'
-		postQuery:
-			for: new ShareCoffee.CrossDomainRESTFactory 'POST'
-		suggest:
-			for: new ShareCoffee.CrossDomainRESTFactory 'GET'
-
-root = global ? window
-
 if not root.ShareCoffee?
   throw new Error("LoadError")
 
+# based on RFC2616 - HTTP specs
+root.ShareCoffee.MaxUrlLength = 2000
+
+root.ShareCoffee.Url = {} unless root.ShareCoffee.Url?
+root.ShareCoffee.Url.Query = "Search/query"
+root.ShareCoffee.Url.PostQuery = "Search/postquery"
+root.ShareCoffee.Url.Suggest = "Search/suggest"
 
 root.ShareCoffee.QueryProperties = class
 
@@ -71,7 +63,7 @@ root.ShareCoffee.QueryProperties = class
     getSafeStringForREST = (input) ->
       encodeURIComponent input.replace(/'/g, '"')
 
-    url = "Search/query?"
+    url = "#{ShareCoffee.Url.Query}?"
 
     for p of @
       propertyValue = @[p]
@@ -164,7 +156,7 @@ root.ShareCoffee.PostQueryProperties = class
       if urlProperties.indexOf(p) > -1 and propertyValue?
         payload['request'][p] = @[p]
 
-    new ShareCoffee.REST.RequestProperties "Search/postQuery", payload, @hostWebUrl, null, @onSuccess, @onError
+    new ShareCoffee.REST.RequestProperties ShareCoffee.Url.PostQuery, payload, @hostWebUrl, null, @onSuccess, @onError
 
 root.ShareCoffee.SuggestProperties = class
 
@@ -186,7 +178,7 @@ root.ShareCoffee.SuggestProperties = class
 
   getUrl: () =>
     urlProperties = ['querytext', 'inumberofquerysuggestions', 'inumberofresultsuggestions', 'fprequerysuggestions', 'fhithighlighting', 'fcapitalizefirstletters', 'showpeoplenamesuggestions', 'culture']
-    url = "Search/suggest?"
+    url = "#{ShareCoffee.Url.Suggest}?"
     getSafeStringForREST = (input) ->
       encodeURIComponent input.replace(/'/g, '"')
     for p of @
@@ -199,20 +191,3 @@ root.ShareCoffee.SuggestProperties = class
 
     url.substr 0, url.length-1
 
-
-root = global ? window
-
-if not root.ShareCoffee? or not root.ShareCoffee.REST?
-	throw new Error("LoadError")
-
-# based on RFC2616 - HTTP specs
-root.ShareCoffee.MaxUrlLength = 2000
-
-root.ShareCoffee.REST.Search =
-	build:
-		query:
-			for: new ShareCoffee.RESTFactory 'GET'
-		postQuery:
-			for: new ShareCoffee.RESTFactory 'POST'
-		suggest:
-			for: new ShareCoffee.RESTFactory 'GET'

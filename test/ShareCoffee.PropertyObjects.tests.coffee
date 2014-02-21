@@ -14,7 +14,8 @@ describe 'ShareCoffee.Properties', ->
       REST:
         RequestProperties: () ->
 
-    require '../src/ShareCoffee.PropertyObjects'
+    require '../src/ShareCoffee.Search'
+    ShareCoffee.MaxUrlLength = 100
 
   describe 'ShareCoffee.QueryProperties', ->
 
@@ -281,6 +282,27 @@ describe 'ShareCoffee.Properties', ->
       actual = sut.getUrl()
       actual.should.be.an 'string'
       actual.should.equal "Search/query?startrow=10&trimduplicates=false"
+
+  describe 'SahreCoffee.Url', ->
+
+    it 'should be defined', ->
+      root.ShareCoffee.should.have.property 'Url'
+      root.ShareCoffee.Url.should.be.an 'object'
+
+    it 'should expose Query Url', ->
+      root.ShareCoffee.Url.should.have.property 'Query'
+      root.ShareCoffee.Url.Query.should.be.an 'string'
+      root.ShareCoffee.Url.Query.should.equal 'Search/query'
+
+    it 'should expose PostQuery Url', ->
+      root.ShareCoffee.Url.should.have.property 'PostQuery'
+      root.ShareCoffee.Url.PostQuery.should.be.an 'string'
+      root.ShareCoffee.Url.PostQuery.should.equal 'Search/postquery'
+
+    it 'should expose Suggest Url', ->
+      root.ShareCoffee.Url.should.have.property 'Suggest'
+      root.ShareCoffee.Url.Suggest.should.be.an 'string'
+      root.ShareCoffee.Url.Suggest.should.equal 'Search/suggest'
 
   describe 'ShareCoffee.PostQueryProperties', ->
 
